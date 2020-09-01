@@ -17,7 +17,7 @@ const state = {
     timeout: null,
 };
 
-const setState = (newState = {}, prevState = state) => Object.assign(prevState, newState);
+const setState = (newState = {}) => ((prevState = state) => Object.assign(prevState, newState))();
 
 const getWords = (async () => {
     const words = await fetch(
