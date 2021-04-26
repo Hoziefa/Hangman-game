@@ -20,7 +20,7 @@ const state = {
 const setState = (newState = {}) => ((prevState = state) => Object.assign(prevState, newState))();
 
 const getWords = (async () => {
-    const words = await fetch('https://cors-anywhere.herokuapp.com/https://api.datamuse.com/words?ml=ringing+in+the+ears')
+    const words = await fetch('https://api.datamuse.com/words?ml=ringing+in+the+ears')
         .then(res => res.json())
         .then(data => data.map(({ word }) => word));
 
@@ -38,7 +38,7 @@ const showNotification = () => {
 };
 
 const renderLetter = letter => {
-    let markup = `<span class="letter">${state.correctLetters.includes(letter) ? letter : ''}</span>`;
+    const markup = `<span class="letter">${ state.correctLetters.includes(letter) ? letter : '' }</span>`;
 
     elements.wordContainer.insertAdjacentHTML('beforeend', markup);
 };
@@ -51,7 +51,7 @@ const displayWord = () => {
 
     selectedWord.split('').forEach(renderLetter);
 
-    let areAllLettersPresent = selectedWord.split('').every(letter => correctLetters.includes(letter));
+    const areAllLettersPresent = selectedWord.split('').every(letter => correctLetters.includes(letter));
 
     if (areAllLettersPresent) {
         setState({ gameDone: true });
